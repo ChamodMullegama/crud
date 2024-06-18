@@ -22,6 +22,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks Table</title>
     <link rel="stylesheet" href="./style/table.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -55,7 +56,9 @@ try {
                         <td><?php echo htmlspecialchars($task['title']); ?></td>
                         <td><?php echo htmlspecialchars($task['description']); ?></td>
                         <td><?php echo htmlspecialchars($task['date']); ?></td>
-                        <td><?php echo $task['status'] == 1 ? 'Complete' : 'Uncomplete'; ?></td>
+                        <td class="<?php echo $task['status'] == 1 ? 'complete' : 'uncomplete'; ?>">
+                            <?php echo $task['status'] == 1 ? 'Complete' : 'Uncomplete'; ?>
+                        </td>
                         <td>
                             <form method="POST" action="edit_task_form.php" style="display:inline;">
                                 <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
@@ -65,14 +68,20 @@ try {
                             </form>
                             <form method="POST" action="./delete.php" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this task?');">
                                 <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
-                                <button type="submit" name="delete_task" class="delete-button"><i class="fa-solid fa-trash"></i></button>
+                                <button type="submit" name="delete_task" class="delete-button">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
                             </form>
-                            <?php if ($task['status'] == 0) : ?>
-                                <form method="POST" action="./changeStatus.php" style="display:inline;">
-                                    <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
-                                    <button type="submit" name="change_status" class="status-button"><i class="fa-solid fa-check"></i></button>
-                                </form>
-                            <?php endif; ?>
+                            <form method="POST" action="./changeStatus.php" style="display:inline;">
+                                <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
+                                <button type="submit" name="change_status" class="status-button">
+                                    <?php if ($task['status'] == 1) : ?>
+                                        <i class="fas fa-stop"></i>
+                                    <?php else : ?>
+                                        <i class="fas fa-check"></i>
+                                    <?php endif; ?>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
