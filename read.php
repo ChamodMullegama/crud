@@ -62,7 +62,7 @@ try {
                         <td>
                             <form method="POST" action="edit_task_form.php" style="display:inline;">
                                 <input type="hidden" name="task_id" value="<?php echo $task['id']; ?>">
-                                <button type="submit" name="edit_task" style="background-color: blue; color: white; border: none; padding: 5px 10px; cursor: pointer; font-size: 16px; border-radius: 4px;">
+                                <button type="submit" name="edit_task" style="background-color: blue; display:inline;">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                             </form>
